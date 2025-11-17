@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Monitoramento em Tempo Real</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <h1>Dashboard de Monitoramento</h1>
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-indicator disconnected" id="status-indicator"></span>
+                <span id="status-text">Desconectado</span>
+            </div>
+            <div class="status-item">
+                <span>Usuários Online:</span>
+                <span id="user-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="metrics-grid">
+            <div class="metric-card" id="metric-cpu">
+                <h3>Utilização de CPU</h3>
+                <span class="value" id="cpu-value">0</span>
+                <span class="unit">%</span>
+            </div>
+            <div class="metric-card" id="metric-ram">
+                <h3>Utilização de RAM</h3>
+                <span class="value" id="ram-value">0</span>
+                <span class="unit">%</span>
+            </div>
+            <div class="metric-card" id="metric-rps">
+                <h3>Requisições/seg</h3>
+                <span class="value" id="rps-value">0</span>
+                <span class="unit">rps</span>
+            </div>
+            <div class="metric-card" id="metric-response">
+                <h3>Tempo de Resposta</h3>
+                <span class="value" id="response-value">0</span>
+                <span class="unit">ms</span>
+            </div>
+        </div>
+
+        <div class="card chart-card">
+            <h2 class="card-title">CPU e Memória (%)</h2>
+            <div class="chart-container">
+                <canvas id="usageChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card chart-card">
+            <h2 class="card-title">Requisições e Tempo de Resposta</h2>
+            <div class="chart-container">
+                <canvas id="requestsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card logs-card">
+            <h2 class="card-title">Logs em Tempo Real</h2>
+            <div class="logs-container" id="logs-container">
+                </div>
+        </div>
+
+        <div class="card alerts-card">
+            <h2 class="card-title">Histórico de Alertas Recentes</h2>
+            <div class="alerts-container" id="alerts-container">
+                </div>
+        </div>
+
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>
